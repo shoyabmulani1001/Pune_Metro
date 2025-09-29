@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pune Metro Aqua Line</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background: #00bcd4; /* Aqua line color */
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        width: 80%;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .stations {
+        flex: 1 1 300px;
+        max-width: 600px;
+      }
+
+      .stations h2 {
+        color: #00bcd4;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #00bcd4;
+        padding-bottom: 5px;
+      }
+
+      .stations ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .stations li {
+        background: #fff;
+        margin: 10px 0;
+        padding: 12px 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1.1em;
+        transition: transform 0.2s, background 0.2s;
+        cursor: pointer;
+      }
+
+      .stations li:hover {
+        transform: translateX(10px);
+        background: #e0f7fa;
+      }
+
+      .arrow {
+        font-size: 20px;
+        color: #00bcd4;
+        margin-top: 10px;
+        animation: bounce 1.5s infinite;
+      }
+
+      .image {
+        flex: 1 1 300px;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .image img {
+        width: 100%;
+        height: auto;
+        margin-top: 300px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+      }
+
+      .image img:hover {
+        transform: scale(1.05);
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #00bcd4;
+        color: #fff;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(15px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+    <header>Pune Metro - Aqua Line</header>
+
+    <div class="container">
+      <div class="stations">
+        <h2>Stations (Hinjewadi to Kharadi)</h2>
+        <ul>
+          <li>Hinjewadi Phase 1</li>
+          <div class="arrow">⬇️</div>
+          <li>Hinjewadi Phase 2</li>
+          <div class="arrow">⬇️</div>
+          <li>Hinjewadi Phase 3</li>
+          <div class="arrow">⬇️</div>
+          <li>Rajiv Gandhi Infotech Park</li>
+          <div class="arrow">⬇️</div>
+          <li>Mundhwa</li>
+          <div class="arrow">⬇️</div>
+          <li>Viman Nagar</li>
+          <div class="arrow">⬇️</div>
+          <li>Kharadi</li>
+        </ul>
+      </div>
+
+      <!-- <div class="image">
+        <img
+          src="/Pune_Metro//Assets//Aqua_Metro_Train.jpg"
+          alt="Pune Metro Aqua Train"
+        />
+      </div> -->
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

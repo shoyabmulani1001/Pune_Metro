@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pune Metro</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* main Section  */
+
+      .info-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px;
+        background: #f4f4f9;
+        font-family: Arial, sans-serif;
+      }
+      .info-text {
+        width: 50%;
+        padding-right: 20px;
+      }
+      .info-text h2 {
+        color: #2c3e50;
+      }
+      .info-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+      }
+      .info-image {
+        width: 45%;
+      }
+      .info-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <!-- MAin -->
+    <section class="info-section">
+      <div class="info-text">
+        <h2>About Pune Metro</h2>
+        <p>
+          Pune Metro is a rapid transit system serving the city of Pune,
+          Maharashtra. It aims to reduce traffic congestion and provide a fast,
+          eco-friendly, and affordable mode of transport. The metro has multiple
+          lines, including the Purple Line and Aqua Line, connecting important
+          parts of the city.
+        </p>
+        <p>
+          Developed by Maharashtra Metro Rail Corporation Limited (MAHA-METRO),
+          it plays a vital role in enhancing urban mobility and reducing travel
+          time.
+        </p>
+      </div>
+
+      <div class="info-image">
+        <img src="/Pune_Metro/Assets/Metro Photo.jpg" alt="Pune Metro Train" />
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      // Load header.html into the placeholder
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    </script>
+  </body>
+</html>

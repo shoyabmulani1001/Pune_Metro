@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Pune Metro</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      /* header {
+        background: #6a1b9a; /* Purple Line Theme */
+        /* color: #fff;
+        text-align: center;
+        padding: 20px;
+        font-size: 2em;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      } */ */
+
+      .container {
+        width: 90%;
+        max-width: 1000px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        color: #6a1b9a;
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #6a1b9a;
+        padding-bottom: 5px;
+      }
+
+      .section {
+        margin: 30px 0;
+      }
+
+      .section img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+      }
+
+      .section p {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        margin-top: 15px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #6a1b9a;
+        color: #fff;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          padding: 20px;
+        }
+
+        .section img {
+          margin-top: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+     <div id="header-placeholder"></div>
+
+    <header>About Pune Metro</header>
+
+    <div class="container">
+      <h2>About Pune Metro</h2>
+
+      <div class="section">
+        <h3>History</h3>
+        <p>
+          Pune Metro is a rapid transit system serving the city of Pune and
+          Pimpri-Chinchwad in Maharashtra. It was initiated to reduce traffic
+          congestion, promote public transport, and provide safe and efficient
+          travel across the city.
+        </p>
+        <img
+          src="/Pune_Metro/Assets/Metro Photo.jpg"
+          alt="Pune Metro History"
+        />
+      </div>
+
+      <div class="section">
+        <h3>Metro Lines</h3>
+        <p>
+          Pune Metro currently has multiple lines: Purple Line, Aqua Line, Blue
+          Line, and Pink Line. The Purple and Aqua Lines are operational,
+          connecting major hubs in the city and suburbs.
+        </p>
+        <img src="/Pune_Metro/Assets/MetriLine.jpg" alt="Pune Metro Lines" />
+      </div>
+
+      <div class="section">
+        <h3>Vision & Mission</h3>
+        <p>
+          Pune Metro aims to provide a modern, eco-friendly, and safe public
+          transport system for citizens. The vision is to reduce traffic
+          congestion, decrease pollution, and provide a convenient travel option
+          for daily commuters.
+        </p>
+        <img src="/Pune_Metro/Assets/Vision.jpg" alt="Pune Metro Vision" />
+      </div>
+    </div>
+    <div id="footer-placeholder"></div>
+
+    <script>
+         fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+
+      fetch("footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer-placeholder").innerHTML = data;
+        });
+    </script>
+</html>
