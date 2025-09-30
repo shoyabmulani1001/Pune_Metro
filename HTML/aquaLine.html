@@ -22,6 +22,18 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 
+      .lang-selector {
+        text-align: right;
+        margin: 20px;
+      }
+
+      select {
+        padding: 5px 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: 1px solid #00bcd4;
+      }
+
       .container {
         width: 80%;
         margin: 50px auto;
@@ -72,38 +84,12 @@
         animation: bounce 1.5s infinite;
       }
 
-      .image {
-        flex: 1 1 300px;
-        max-width: 500px;
-        text-align: center;
-      }
-
-      .image img {
-        width: 100%;
-        height: auto;
-        margin-top: 300px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s;
-      }
-
-      .image img:hover {
-        transform: scale(1.05);
-      }
-
       footer {
         text-align: center;
         padding: 20px;
         background: #00bcd4;
         color: #fff;
         margin-top: 40px;
-      }
-
-      @media (max-width: 900px) {
-        .container {
-          flex-direction: column;
-          align-items: center;
-        }
       }
 
       @keyframes bounce {
@@ -119,12 +105,23 @@
   </head>
   <body>
     <div id="header-placeholder"></div>
-    <header>Pune Metro - Aqua Line</header>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+      <label for="language">🌐 Language:</label>
+      <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="mr">Marathi</option>
+        <option value="hi">Hindi</option>
+      </select>
+    </div>
+
+    <header id="page-title">Pune Metro - Aqua Line</header>
 
     <div class="container">
       <div class="stations">
-        <h2>Stations (Hinjewadi to Kharadi)</h2>
-        <ul>
+        <h2 id="stations-title">Stations (Hinjewadi to Kharadi)</h2>
+        <ul id="stations-list">
           <li>Hinjewadi Phase 1</li>
           <div class="arrow">⬇️</div>
           <li>Hinjewadi Phase 2</li>
@@ -140,28 +137,97 @@
           <li>Kharadi</li>
         </ul>
       </div>
-
-      <!-- <div class="image">
-        <img
-          src="/Pune_Metro//Assets//Aqua_Metro_Train.jpg"
-          alt="Pune Metro Aqua Train"
-        />
-      </div> -->
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script>
+      const translations = {
+        en: {
+          pageTitle: "Pune Metro - Aqua Line",
+          stationsTitle: "Stations (Hinjewadi to Kharadi)",
+          stations: [
+            "Hinjewadi Phase 1",
+            "Hinjewadi Phase 2",
+            "Hinjewadi Phase 3",
+            "Rajiv Gandhi Infotech Park",
+            "Mundhwa",
+            "Viman Nagar",
+            "Kharadi",
+          ],
+          footerText: "© 2025 Pune Metro Project. All rights reserved.",
+        },
+        mr: {
+          pageTitle: "पुणे मेट्रो - अ‍ॅक्वा मार्ग",
+          stationsTitle: "स्थानके (हिंजवडी ते खराडी)",
+          stations: [
+            "हिंजवडी फेज 1",
+            "हिंजवडी फेज 2",
+            "हिंजवडी फेज 3",
+            "राजीव गांधी आयटी पार्क",
+            "मुंधवा",
+            "विमान नगर",
+            "खराडी",
+          ],
+          footerText: "© २०२५ पुणे मेट्रो प्रकल्प. सर्व हक्क राखीव.",
+        },
+        hi: {
+          pageTitle: "पुणे मेट्रो - एक्वा लाइन",
+          stationsTitle: "स्टेशन्स (हिंजेवाड़ी से खराड़ी)",
+          stations: [
+            "हिंजेवाड़ी फेज 1",
+            "हिंजेवाड़ी फेज 2",
+            "हिंजेवाड़ी फेज 3",
+            "राजीव गांधी आईटी पार्क",
+            "मुंधवा",
+            "विमान नगर",
+            "खराड़ी",
+          ],
+          footerText: "© 2025 पुणे मेट्रो प्रोजेक्ट. सर्वाधिकार सुरक्षित.",
+        },
+      };
+
+      function changeLanguage() {
+        const lang = document.getElementById("language").value;
+
+        // Page Title
+        document.getElementById("page-title").innerText =
+          translations[lang].pageTitle;
+
+        // Stations Title
+        document.getElementById("stations-title").innerText =
+          translations[lang].stationsTitle;
+
+        // Stations List
+        const stationsList = document.getElementById("stations-list");
+        stationsList.innerHTML = "";
+        translations[lang].stations.forEach((station, index) => {
+          stationsList.innerHTML += `<li>${station}</li>`;
+          if (index < translations[lang].stations.length - 1) {
+            stationsList.innerHTML += `<div class="arrow">⬇️</div>`;
+          }
+        });
+
+        // Footer
+        if (document.getElementById("footer-text")) {
+          document.getElementById("footer-text").innerText =
+            translations[lang].footerText;
+        }
+      }
+
+      // Load header & footer
       fetch("header.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("header-placeholder").innerHTML = data;
+          changeLanguage(); // apply default English
         });
 
       fetch("footer.html")
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("footer-placeholder").innerHTML = data;
+          changeLanguage(); // apply default English
         });
     </script>
   </body>

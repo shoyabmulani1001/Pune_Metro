@@ -12,6 +12,19 @@
         padding: 0;
       }
 
+      /* Language dropdown */
+      .lang-select {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
       header {
         background: #6a1b9a; /* Purple line color */
         color: #fff;
@@ -72,40 +85,6 @@
         animation: bounce 1.5s infinite;
       }
 
-      .image {
-        flex: 1 1 300px;
-        max-width: 500px;
-        text-align: center;
-      }
-
-      .image img {
-        width: 100%;
-        height: auto;
-        margin-top: 300px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s;
-      }
-
-      .image img:hover {
-        transform: scale(1.05);
-      }
-
-      footer {
-        text-align: center;
-        padding: 20px;
-        background: #6a1b9a;
-        color: #fff;
-        margin-top: 40px;
-      }
-
-      @media (max-width: 900px) {
-        .container {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-
       @keyframes bounce {
         0%,
         100% {
@@ -115,16 +94,31 @@
           transform: translateY(15px);
         }
       }
+
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="header-placeholder"></div>
+
+    <!-- Language Selector -->
+    <select class="lang-select" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="mr">मराठी</option>
+      <option value="hi">हिंदी</option>
+    </select>
+
     <header>Pune Metro - Purple Line</header>
 
     <div class="container">
       <div class="stations">
-        <h2>Stations (PCMC to Swargate)</h2>
-        <ul>
+        <h2 id="stations-heading">Stations (PCMC to Swargate)</h2>
+        <ul id="stations-list">
           <li>PCMC (Pimpri Chinchwad Municipal Corporation)</li>
           <div class="arrow">⬇️</div>
           <li>Sant Tukaram Nagar</li>
@@ -149,35 +143,111 @@
           <div class="arrow">⬇️</div>
           <li>Kasba Peth (renamed from Budhwar Peth)</li>
           <div class="arrow">⬇️</div>
-
           <li>Mandai</li>
           <div class="arrow">⬇️</div>
           <li>Swargate</li>
         </ul>
       </div>
-
-      <!-- <div class="image">
-        <img
-          src="/Pune_Metro//Assets//Metro Photo.jpg"
-          alt="Pune Metro Train"
-        />
-      </div> -->
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script>
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("header-placeholder").innerHTML = data;
+      const stationsTranslations = {
+        en: {
+          heading: "Stations (PCMC to Swargate)",
+          stations: [
+            "PCMC (Pimpri Chinchwad Municipal Corporation)",
+            "Sant Tukaram Nagar",
+            "Bhosari / Nashik Phata",
+            "Kasarwadi",
+            "Phugewadi",
+            "Dapodi",
+            "Bopodi",
+            "Khadki",
+            "Range Hill",
+            "Shivaji Nagar",
+            "Civil Court (renamed Pune District)",
+            "Kasba Peth (renamed from Budhwar Peth)",
+            "Mandai",
+            "Swargate",
+          ],
+        },
+        mr: {
+          heading: "स्थानक (PCMC ते स्वारगेट)",
+          stations: [
+            "PCMC (पिंपरी चिंचवड महानगरपालिका)",
+            "संत तुकाराम नगर",
+            "भोसरी / नाशिक फाटा",
+            "कासरवाडी",
+            "फुगेवाडी",
+            "दापोदी",
+            "बोपोडी",
+            "खडकी",
+            "रेंज हिल",
+            "शिवाजी नगर",
+            "सिव्हिल कोर्ट (पुणे जिल्हा)",
+            "कसबा पेठ (बुधवार पेठ पासून बदलले)",
+            "मंडई",
+            "स्वारगेट",
+          ],
+        },
+        hi: {
+          heading: "स्टेशन (PCMC से स्वारगेट)",
+          stations: [
+            "PCMC (पिंपरी चिंचवड नगर निगम)",
+            "संत तुकाराम नगर",
+            "भोसरी / नासिक फाटा",
+            "कासरवाडी",
+            "फुगेवाडी",
+            "दापोदी",
+            "बोपोडी",
+            "खडकी",
+            "रेंज हिल",
+            "शिवाजी नगर",
+            "सिविल कोर्ट (पुणे जिला)",
+            "कसबा पेठ (बुधवार पेठ से बदला गया)",
+            "मंडई",
+            "स्वारगेट",
+          ],
+        },
+      };
+
+      function changeLanguage(lang) {
+        const heading = document.getElementById("stations-heading");
+        const list = document.getElementById("stations-list");
+
+        heading.innerText = stationsTranslations[lang].heading;
+
+        // Clear list and rebuild
+        list.innerHTML = "";
+        const stations = stationsTranslations[lang].stations;
+        stations.forEach((station, index) => {
+          const li = document.createElement("li");
+          li.innerText = station;
+          list.appendChild(li);
+          if (index < stations.length - 1) {
+            const arrow = document.createElement("div");
+            arrow.className = "arrow";
+            arrow.innerText = "⬇️";
+            list.appendChild(arrow);
+          }
         });
+      }
+
+      fetch("header.html")
+        .then((res) => res.text())
+        .then(
+          (data) =>
+            (document.getElementById("header-placeholder").innerHTML = data)
+        );
 
       fetch("footer.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("footer-placeholder").innerHTML = data;
-        });
+        .then((res) => res.text())
+        .then(
+          (data) =>
+            (document.getElementById("footer-placeholder").innerHTML = data)
+        );
     </script>
   </body>
 </html>
